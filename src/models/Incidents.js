@@ -28,7 +28,7 @@ class Incidents {
 
       return count
     } catch (err) {
-      console.log(err)
+      return { error: err }
     }
   }
 
@@ -51,7 +51,7 @@ class Incidents {
 
       return { id }
     } catch (err) {
-      console.log(err)
+      return { error: err }
     }
   }
 
@@ -60,6 +60,7 @@ class Incidents {
       const incident = await db('incidents')
         .where('id', id)
         .select('ong_id')
+        .select('title')
         .first()
 
       if (!incident) {
@@ -82,10 +83,10 @@ class Incidents {
 
       return {
         status: 200,
-        msg: { success: 'Caso Excluído Com Sucesso!' }
+        msg: { success: `O caso ${incident.title} foi excluído com sucesso!` }
       }
     } catch (err) {
-      console.log(err)
+      return { error: err }
     }
   }
 }
