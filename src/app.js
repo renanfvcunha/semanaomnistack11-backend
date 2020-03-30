@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
 const routes = require('./routes')
+const { errors } = require('celebrate')
 
 class App {
   constructor () {
@@ -20,6 +21,7 @@ class App {
 
   routes () {
     this.server.use(routes)
+    this.server.use(errors())
   }
 }
 
